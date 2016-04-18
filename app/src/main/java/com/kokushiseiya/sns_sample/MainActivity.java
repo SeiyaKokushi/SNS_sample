@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -24,6 +25,7 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     Firebase mRootRef;
 
     public ArrayList<Post> lists;
-    public List<Map<String, Object>> jsonLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //viewとの紐付け
-        mTextView = (TextView)findViewById(R.id.main_userId);
-        mUpdateButton = (Button)findViewById(R.id.main_updateButton);
-        mPostButton = (Button)findViewById(R.id.main_postButton);
-        mLoginButton = (Button)findViewById(R.id.main_loginButton);
+        mTextView = (TextView) findViewById(R.id.main_userId);
+        mUpdateButton = (Button) findViewById(R.id.main_updateButton);
+        mPostButton = (Button) findViewById(R.id.main_postButton);
+        mLoginButton = (Button) findViewById(R.id.main_loginButton);
+
+        lists = new ArrayList<>();
 
         setUpButtonListener();
 
@@ -61,17 +64,49 @@ public class MainActivity extends AppCompatActivity {
         //ルートパスの指定
         mRootRef = new Firebase(BuildConfig.FIREBASE_URL);
 
-        mRootRef.child("post").addValueEventListener(new ValueEventListener() {
+        mRootRef.child("post").addChildEventListener(new ChildEventListener() {
+
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Map<String, Object> newPost = (Map<String, Object>) dataSnapshot.getValue();
+
+                String text = String.valueOf(newPost.get("text"));
+
+                HashMap<String, String> user = (HashMap<String, String>) newPost.get("user");
+                String userId = user.get("userId");
+                String userName = user.get("userName");
+
+                int likeNum = Integer.parseInt(String.valueOf(newPost.get("likeNum")));
+
+                Log.d("MAIN", text);
+                Log.d("MAIN", userId);
+                Log.d("MAIN", userName);
+                Log.d("MAIN", String.valueOf(likeNum));
+
+                Post post = new Post(new User(userId, userName), text, likeNum);
 
 
-                /*
+                lists.add(post);
+
                 ListAdapter listAdapter = new ListAdapter(getApplicationContext(), R.layout.contain_layout, lists);
 
                 ListView listView = (ListView) findViewById(R.id.list);
                 listView.setAdapter(listAdapter);
-                */
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
@@ -79,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
 
         /*
 
@@ -105,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
         lists.add(post6);
 
         */
-
-
 
     }
 
