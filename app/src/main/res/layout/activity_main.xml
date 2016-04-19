@@ -6,6 +6,13 @@
     android:orientation="vertical"
     android:padding="8dp">
 
+    <TextView
+        android:id="@+id/main_userId"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:text="GUEST"
+        android:textAlignment="center"
+        android:gravity="center"/>
 
     <ListView
         android:layout_width="match_parent"
@@ -21,14 +28,19 @@
         android:orientation="horizontal" >
 
         <Button
+            android:id="@+id/main_postButton"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="POST"/>
 
         <Button
+            android:id="@+id/main_loginButton"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="LOGIN"/>
+
 
 
     </LinearLayout>
