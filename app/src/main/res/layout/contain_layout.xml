@@ -6,19 +6,6 @@
     android:elevation="4dp">
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="4dp">
-
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:id="@+id/userImageView"
-            android:src="@drawable/ron" />
-    </LinearLayout>
-
-    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +23,8 @@
                 android:text="User Name"
                 android:id="@+id/userName"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" />
+                android:layout_alignParentTop="true"
+                android:textColor="#000000"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,22 +39,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_alignParentBottom="false"
                 android:layout_alignParentEnd="false"
-                android:layout_centerVertical="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="time"
-                android:id="@+id/time"
-                android:layout_alignParentStart="false"
-                android:layout_alignWithParentIfMissing="false"
-                android:layout_alignParentTop="false"
-                android:layout_marginLeft="4dp"
-                android:layout_alignParentBottom="false"
-                android:layout_alignParentEnd="false"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:textColor="#000000" />
 
         </RelativeLayout>
 
@@ -80,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="19dip"
-                android:text="text\ntext\ntext\ntext"/>
+                android:text="text\ntext\ntext\ntext"
+                android:textColor="#000000"/>
 
         </LinearLayout>
 
@@ -93,53 +68,9 @@
                 android:orientation="horizontal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/replyButton"
-                    android:src="@drawable/ic_reply_grey_700_18dp"
-                    android:background="@android:color/transparent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
-                    android:id="@+id/replyNum"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="bottom" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/shareButton"
-                    android:src="@drawable/ic_repeat_grey_700_18dp"
-                    android:background="@android:color/transparent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="0"
-                    android:id="@+id/shareNum"
-                    android:layout_marginLeft="4dp"
-                    android:layout_gravity="bottom" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_margin="8dp">
 
                 <ImageButton
                     android:layout_width="wrap_content"
@@ -155,7 +86,8 @@
                     android:text="0"
                     android:id="@+id/likeNum"
                     android:layout_marginLeft="4dp"
-                    android:layout_gravity="bottom" />
+                    android:layout_gravity="bottom"
+                    android:textColor="#000000" />
             </LinearLayout>
         </LinearLayout>
 
