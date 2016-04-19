@@ -25,6 +25,7 @@ import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,12 +33,12 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     TextView mTextView;
-    Button mUpdateButton;
     Button mPostButton;
     Button mLoginButton;
 
     Firebase mRootRef;
 
+    //Postを格納するリスト
     public ArrayList<Post> lists;
 
     @Override
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
         //viewとの紐付け
         mTextView = (TextView) findViewById(R.id.main_userId);
-        mUpdateButton = (Button) findViewById(R.id.main_updateButton);
         mPostButton = (Button) findViewById(R.id.main_postButton);
         mLoginButton = (Button) findViewById(R.id.main_loginButton);
 
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //ルートパスの指定
         mRootRef = new Firebase(BuildConfig.FIREBASE_URL);
 
+        //コールバックの設定
         mRootRef.child("post").addChildEventListener(new ChildEventListener() {
 
             @Override
@@ -78,15 +79,21 @@ public class MainActivity extends AppCompatActivity {
 
                 int likeNum = Integer.parseInt(String.valueOf(newPost.get("likeNum")));
 
+                String timeStampKey = String.valueOf(dataSnapshot.getKey());
+
                 Log.d("MAIN", text);
                 Log.d("MAIN", userId);
                 Log.d("MAIN", userName);
                 Log.d("MAIN", String.valueOf(likeNum));
+                Log.d("MAIN", timeStampKey);
 
-                Post post = new Post(new User(userId, userName), text, likeNum);
+                Post post = new Post(new User(userId, userName), text, likeNum, timeStampKey);
 
 
                 lists.add(post);
+
+                //逆順にする破壊的メソッド
+                Collections.reverse(lists);
 
                 ListAdapter listAdapter = new ListAdapter(getApplicationContext(), R.layout.contain_layout, lists);
 
@@ -114,34 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-        /*
-
-        User user1 = new User("subway", "さぶうぇい");
-        User user2 = new User("ronn", "ロン");
-        User user3 = new User("harusame", "はるさめ");
-        User user4 = new User("zume", "づめ");
-
-        Post post1 = new Post(user1, "東工大");
-        Post post2 = new Post(user2, "東工大M1");
-        Post post3 = new Post(user1, "俺はB4");
-        Post post4 = new Post(user3, "ど田舎のSFC");
-        Post post5 = new Post(user4, "素数大好き");
-        Post post6 = new Post(user3, "カロリー潰す");
-
-        // 各項目の内容を格納するArrayListのインスタンスを生成
-        ArrayList<Post> lists = new ArrayList<>();
-
-        lists.add(post1);
-        lists.add(post2);
-        lists.add(post3);
-        lists.add(post4);
-        lists.add(post5);
-        lists.add(post6);
-
-        */
-
     }
 
     @Override
@@ -156,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
         if(userIdDefault != null){
             //ログイン済みならPOSTとUPDATEを可能に
             mTextView.setText(userIdDefault);
-            mUpdateButton.setVisibility(View.VISIBLE);
             mPostButton.setVisibility(View.VISIBLE);
             mLoginButton.setVisibility(View.GONE);
         }
@@ -164,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
 
     //ログインしていないとき
     private void setViewInvisivle(){
-        mUpdateButton.setVisibility(View.GONE);
         mPostButton.setVisibility(View.GONE);
         mLoginButton.setVisibility(View.VISIBLE);
     }

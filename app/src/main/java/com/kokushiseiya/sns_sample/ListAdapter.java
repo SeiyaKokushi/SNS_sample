@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.firebase.client.Firebase;
+
 import java.util.ArrayList;
 
 /**
@@ -33,7 +35,7 @@ public class ListAdapter extends ArrayAdapter<Post> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final View view;
-        ImageButton likeButton;
+        final ImageButton likeButton;
 
         if (convertView != null) {
             view = convertView;
@@ -47,13 +49,13 @@ public class ListAdapter extends ArrayAdapter<Post> {
         likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int beforeClicked = Integer.parseInt(((TextView) view.findViewById(R.id.likeNum)).getText().toString());
+                post.plusLike();
+                int likeNum = post.getLikeNum();
 
-                if (beforeClicked == post.getLikeNum() + 1) {
-                    ((TextView) view.findViewById(R.id.likeNum)).setText(String.valueOf(post.getLikeNum()));
-                } else {
-                    ((TextView) view.findViewById(R.id.likeNum)).setText(String.valueOf(post.getLikeNum() + 1));
-                }
+                Firebase root = new Firebase(BuildConfig.FIREBASE_URL).child("post/" + post.getTimeStampKey() + "/likeNum");
+                root.setValue(likeNum);
+
+                ((TextView)view.findViewById(R.id.likeNum)).setText(String.valueOf(likeNum));
             }
         });
 

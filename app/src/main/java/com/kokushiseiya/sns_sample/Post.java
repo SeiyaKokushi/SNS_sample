@@ -9,6 +9,8 @@ public class Post {
     private String text; // リストに表示させる文章
     private int likeNum; // Like(ファボ)数
 
+    private String timeStampKey;
+
     //空のコンストラクタ
     public Post(){ }
 
@@ -18,13 +20,15 @@ public class Post {
         this.text = text;
 
         this.likeNum = 0;
+        this.timeStampKey = null;
     }
 
     //Postをロードするとき
-    public Post(User user, String text, int likeNum){
+    public Post(User user, String text, int likeNum, String timeStampKey){
         this.user = user;
         this.text = text;
         this.likeNum = likeNum;
+        this.timeStampKey = timeStampKey;
     }
 
     public User getUser() {
@@ -40,7 +44,10 @@ public class Post {
         return this.likeNum;
     }
 
-    //like数を変化させるメソッド
+    public String getTimeStampKey(){
+        return this.timeStampKey;
+    }
+
     public void plusLike(){
         this.likeNum++;
     }
