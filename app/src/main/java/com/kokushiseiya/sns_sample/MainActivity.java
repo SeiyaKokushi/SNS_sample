@@ -81,12 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
                 String timeStampKey = String.valueOf(dataSnapshot.getKey());
 
-                Log.d("MAIN", text);
-                Log.d("MAIN", userId);
-                Log.d("MAIN", userName);
-                Log.d("MAIN", String.valueOf(likeNum));
-                Log.d("MAIN", timeStampKey);
-
                 Post post = new Post(new User(userId, userName), text, likeNum, timeStampKey);
 
 
