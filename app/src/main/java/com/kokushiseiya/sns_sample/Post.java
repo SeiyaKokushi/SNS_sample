@@ -20,15 +20,13 @@ public class Post {
         this.text = text;
 
         this.likeNum = 0;
-        this.timeStampKey = null;
     }
 
     //Postをロードするとき
-    public Post(User user, String text, int likeNum, String timeStampKey){
+    public Post(User user, String text, int likeNum){
         this.user = user;
         this.text = text;
         this.likeNum = likeNum;
-        this.timeStampKey = timeStampKey;
     }
 
     public User getUser() {
@@ -42,10 +40,6 @@ public class Post {
 
     public int getLikeNum() {
         return this.likeNum;
-    }
-
-    public String getTimeStampKey(){
-        return this.timeStampKey;
     }
 
     public void plusLike(){

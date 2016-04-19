@@ -9,15 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.firebase.client.Firebase;
-
 public class LoginActivity extends AppCompatActivity {
 
     EditText userName;
     EditText userId;
     Button mButton;
-
-    Firebase mRootRef;
 
     public static Intent createIntent(Context context){
         Intent intent = new Intent(context, LoginActivity.class);
@@ -34,9 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         userName = (EditText)findViewById(R.id.login_userName);
         userId = (EditText)findViewById(R.id.login_userId);
         mButton = (Button)findViewById(R.id.login_loginButton);
-
-        //ルートパスの指定
-        mRootRef = new Firebase(BuildConfig.FIREBASE_URL);
+        
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 User user = new User(userId.getText().toString(), userName.getText().toString());
 
-                mRootRef.child("users/" + user.getUserId()).setValue(user);
 
                 //端末にログイン情報保存
                 SharedPreferences data = getSharedPreferences("DataSave", Context.MODE_PRIVATE);
