@@ -60,7 +60,7 @@ public class ListAdapter extends ArrayAdapter<Post> {
         });
 
         ((TextView) view.findViewById(R.id.userName)).setText(post.getUser().getUserName());
-        ((TextView) view.findViewById(R.id.userId)).setText(post.getUser().getUserId());
+        ((TextView) view.findViewById(R.id.userId)).setText("@" + post.getUser().getUserId());
         ((TextView) view.findViewById(R.id.contain)).setText(post.getText());
         ((TextView) view.findViewById(R.id.likeNum)).setText(String.valueOf(post.getLikeNum()));
 
