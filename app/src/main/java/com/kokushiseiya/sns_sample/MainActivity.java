@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.firebase.client.Firebase;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,33 +15,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Firebase.setAndroidContext(this);
+
+
+        User user1 = new User("subway", "さぶうぇい");
+        User user2 = new User("ronn", "ロン");
+        User user3 = new User("harusame", "はるさめ");
+        User user4 = new User("zume", "づめ");
+
+
+        Post post1 = new Post(user1, "東工大");
+        Post post2 = new Post(user2, "東工大M1");
+        Post post3 = new Post(user1, "俺はB4");
+        Post post4 = new Post(user3, "ど田舎のSFC");
+        Post post5 = new Post(user4, "素数大好き");
+        Post post6 = new Post(user3, "カロリー潰す");
+
         // 各項目の内容を格納するArrayListのインスタンスを生成
-        ArrayList<Contain> lists = new ArrayList<Contain>();
+        ArrayList<Post> lists = new ArrayList<>();
 
-        // 各項目の内容を初期化して、上で生成したlistに格納
-        Contain contain1 = new Contain();
-        contain1.setUserName("ろん");
-        contain1.setUserId("ronnnnn");
-        contain1.setTime("2016/04/18");
-        contain1.setText("Hello World!");
-        lists.add(contain1);
-
-        Contain contain2 = new Contain();
-        contain2.setUserName("ろん");
-        contain2.setUserId("ronnnnn");
-        contain2.setTime("2016/04/18");
-        contain2.setText("Hello Droiders!");
-        lists.add(contain2);
-
-        Contain contain3 = new Contain();
-        contain3.setUserName("ろん");
-        contain3.setUserId("ronnnnn");
-        contain3.setTime("2016/04/18");
-        contain3.setText("test\n" +
-                "test\n" +
-                "test\n" +
-                "test");
-        lists.add(contain3);
+        lists.add(post1);
+        lists.add(post2);
+        lists.add(post3);
+        lists.add(post4);
+        lists.add(post5);
+        lists.add(post6);
 
         ListAdapter listAdapter = new ListAdapter(this, R.layout.contain_layout, lists);
 
