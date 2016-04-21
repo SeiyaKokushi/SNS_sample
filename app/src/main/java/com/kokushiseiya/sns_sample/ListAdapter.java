@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.firebase.client.Firebase;
 
 import java.util.ArrayList;
 
@@ -52,8 +51,7 @@ public class ListAdapter extends ArrayAdapter<Post> {
                 post.plusLike();
                 int likeNum = post.getLikeNum();
 
-                Firebase root = new Firebase(BuildConfig.FIREBASE_URL).child("post/" + post.getTimeStampKey() + "/likeNum");
-                root.setValue(likeNum);
+
 
                 ((TextView)view.findViewById(R.id.likeNum)).setText(String.valueOf(likeNum));
             }
