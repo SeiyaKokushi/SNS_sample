@@ -1,7 +1,3 @@
 <resources>
-<<<<<<< HEAD
     <string name="app_name">Drotter</string>
-=======
-    <string name="app_name">SNS_sample</string>
->>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
 </resources>

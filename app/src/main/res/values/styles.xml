@@ -1,7 +1,6 @@
 <resources>
 
     <!-- Base application theme. -->
-<<<<<<< HEAD
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -15,15 +14,4 @@
         <item name="colorPrimaryDark">@color/button_material_dark</item>
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
-
-
-=======
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
->>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
 </resources>
