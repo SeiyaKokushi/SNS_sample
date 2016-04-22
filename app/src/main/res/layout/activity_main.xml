@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,52 +27,3 @@
     </ListView>
 
 </android.support.design.widget.CoordinatorLayout>
-=======
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:padding="8dp">
-
-    <TextView
-        android:id="@+id/main_userId"
-        android:layout_width="match_parent"
-        android:layout_height="36dp"
-        android:text="GUEST"
-        android:textAlignment="center"
-        android:gravity="center"/>
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/list" >
-    </ListView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/main_postButton"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:text="POST"/>
-
-        <Button
-            android:id="@+id/main_loginButton"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
-            android:text="LOGIN"/>
-
-
-
-    </LinearLayout>
-
-</LinearLayout>
->>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
