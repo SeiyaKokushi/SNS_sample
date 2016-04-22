@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Firebase mRootRef;
 
     //Postを格納するリスト
-    public ArrayList<Post> lists;
+    public ArrayList<Post> mPostLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.setTitleTextColor(0xffa4c439);
         mToolbar.setLogo(R.drawable.ic_logo);
 
-        lists = new ArrayList<>();
+        mPostLists = new ArrayList<>();
 
         //Firebaseのsetup
         Firebase.setAndroidContext(this);
@@ -81,17 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Post post = new Post(new User(userId, userName), text, likeNum, timeStampKey);
 
+                mPostLists.add(post);
 
-                lists.add(post);
-
-                //逆順にする破壊的メソッド
-                Collections.reverse(lists);
-
-                ListAdapter listAdapter = new ListAdapter(getApplicationContext(), R.layout.contain_layout, lists);
-
-                ListView listView = (ListView) findViewById(R.id.list);
-                listView.setAdapter(listAdapter);
-                ViewCompat.setNestedScrollingEnabled(listView, true);
+                setList(mPostLists);
             }
 
             @Override
@@ -101,7 +93,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String timeStampKey = String.valueOf(dataSnapshot.getKey());
 
+                for(int i = 0; i < mPostLists.size(); i++){
+                    if(mPostLists.get(i).getTimeStampKey().equals(timeStampKey)){
+                        mPostLists.remove(i);
+                    }
+                }
+
+                setList(mPostLists);
             }
 
             @Override
@@ -112,6 +112,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
+            }
+
+            private void setList(ArrayList<Post> lists){
+
+                ArrayList<Post> setLists = new ArrayList<>(lists);
+
+                //逆順にする破壊的メソッド
+                Collections.reverse(setLists);
+
+                ListAdapter listAdapter = new ListAdapter(getApplicationContext(), R.layout.contain_layout, setLists);
+
+                ListView listView = (ListView) findViewById(R.id.list);
+                listView.setAdapter(listAdapter);
+                ViewCompat.setNestedScrollingEnabled(listView, true);
             }
         });
     }
