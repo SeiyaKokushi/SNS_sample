@@ -10,8 +10,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme">
+=======
+        <activity android:name=".MainActivity">
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

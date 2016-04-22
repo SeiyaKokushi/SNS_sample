@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< HEAD
 import android.widget.ImageButton;
+=======
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
 
 import com.firebase.client.Firebase;
 
@@ -20,7 +23,10 @@ public class PostActivity extends AppCompatActivity {
 
     Button mButton;
     EditText mEditText;
+<<<<<<< HEAD
     ImageButton closeButton;
+=======
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
 
     Firebase mRootRef;
 
@@ -37,7 +43,10 @@ public class PostActivity extends AppCompatActivity {
 
         mButton = (Button)findViewById(R.id.post_postButton);
         mEditText = (EditText)findViewById(R.id.post_post);
+<<<<<<< HEAD
         closeButton = (ImageButton)findViewById(R.id.post_closeButton);
+=======
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
 
         //パスの指定(https://<APP-NAME>.firebaseio.com/)
         mRootRef = new Firebase(BuildConfig.FIREBASE_URL);
@@ -59,6 +68,7 @@ public class PostActivity extends AppCompatActivity {
                 finish();
             }
         });
+<<<<<<< HEAD
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,5 +76,7 @@ public class PostActivity extends AppCompatActivity {
                 finish();
             }
         });
+=======
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
     }
 }

@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< HEAD
 import android.widget.Toast;
+=======
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
 
 import com.firebase.client.Firebase;
 
@@ -42,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 if (!userId.getText().toString().equals("") && !userName.getText().toString().equals("")) {
 
                     User user = new User(userId.getText().toString(), userName.getText().toString());
@@ -59,6 +63,21 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Error!!", Toast.LENGTH_SHORT).show();
                 }
+=======
+
+                User user = new User(userId.getText().toString(), userName.getText().toString());
+
+                mRootRef.child("users/" + user.getUserId()).setValue(user);
+
+                //端末にログイン情報保存
+                SharedPreferences data = getSharedPreferences("DataSave", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = data.edit();
+                editor.putString("USERID", userId.getText().toString());
+                editor.putString("USERNAME", userName.getText().toString());
+                editor.apply();
+
+                finish();
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
             }
         });
     }

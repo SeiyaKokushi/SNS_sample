@@ -2,6 +2,7 @@ package com.kokushiseiya.sns_sample;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+<<<<<<< HEAD
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,9 +42,15 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+<<<<<<< HEAD
     Toolbar mToolbar;
     Menu mMenu;
     String userIdDefault;
+=======
+    TextView mTextView;
+    Button mPostButton;
+    Button mLoginButton;
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
 
     Firebase mRootRef;
 
@@ -51,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //viewとの紐付け
+<<<<<<< HEAD
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
 
         //ToolbarをActionbarとして設定
@@ -61,6 +74,19 @@ public class MainActivity extends AppCompatActivity {
 
         lists = new ArrayList<>();
 
+=======
+        mTextView = (TextView) findViewById(R.id.main_userId);
+        mPostButton = (Button) findViewById(R.id.main_postButton);
+        mLoginButton = (Button) findViewById(R.id.main_loginButton);
+
+        lists = new ArrayList<>();
+
+        setUpButtonListener();
+
+        //Viewの可視性の初期化
+        setViewInvisivle();
+
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
         //Firebaseのsetup
         Firebase.setAndroidContext(this);
 
@@ -96,7 +122,10 @@ public class MainActivity extends AppCompatActivity {
 
                 ListView listView = (ListView) findViewById(R.id.list);
                 listView.setAdapter(listAdapter);
+<<<<<<< HEAD
                 ViewCompat.setNestedScrollingEnabled(listView, true);
+=======
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
             }
 
             @Override
@@ -127,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
         //User情報の取得
         SharedPreferences data = getSharedPreferences("DataSave",Context.MODE_PRIVATE);
+<<<<<<< HEAD
         userIdDefault = data.getString("USERID",null);
 
         if (mMenu != null) {
@@ -180,6 +210,39 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+=======
+        String userIdDefault = data.getString("USERID",null);
+
+        //ログイン済みかどうか
+        if(userIdDefault != null){
+            //ログイン済みならPOSTとUPDATEを可能に
+            mTextView.setText(userIdDefault);
+            mPostButton.setVisibility(View.VISIBLE);
+            mLoginButton.setVisibility(View.GONE);
+        }
+    }
+
+    //ログインしていないとき
+    private void setViewInvisivle(){
+        mPostButton.setVisibility(View.GONE);
+        mLoginButton.setVisibility(View.VISIBLE);
+    }
+
+    private void setUpButtonListener() {
+        mLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(LoginActivity.createIntent(getApplicationContext()));
+            }
+        });
+
+        mPostButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(PostActivity.createIntent(getApplicationContext()));
+            }
+        });
+>>>>>>> 0193061efd7536eae529c0e7a77c8394713e639d
     }
 
 
