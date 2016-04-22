@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< HEAD
 import android.widget.Toast;
+=======
+>>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -36,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+<<<<<<< HEAD
                 if (!userId.getText().toString().equals("") && !userName.getText().toString().equals("")) {
                     User user = new User(userId.getText().toString(), userName.getText().toString());
 
@@ -50,6 +54,20 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Error!!", Toast.LENGTH_SHORT).show();
                 }
+=======
+
+                User user = new User(userId.getText().toString(), userName.getText().toString());
+
+
+                //端末にログイン情報保存
+                SharedPreferences data = getSharedPreferences("DataSave", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = data.edit();
+                editor.putString("USERID", userId.getText().toString());
+                editor.putString("USERNAME", userName.getText().toString());
+                editor.apply();
+
+                finish();
+>>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
             }
         });
     }

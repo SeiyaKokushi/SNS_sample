@@ -8,8 +8,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme">
+=======
+        <activity android:name=".MainActivity">
+>>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

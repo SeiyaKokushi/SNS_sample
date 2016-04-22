@@ -8,14 +8,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+<<<<<<< HEAD
 import android.widget.ImageButton;
+=======
+>>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
 
 public class PostActivity extends AppCompatActivity {
 
 
     Button mButton;
     EditText mEditText;
+<<<<<<< HEAD
     ImageButton closeButton;
+=======
+>>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
 
     public static Intent createIntent(Context context){
         Intent intent = new Intent(context, PostActivity.class);
@@ -30,7 +36,10 @@ public class PostActivity extends AppCompatActivity {
 
         mButton = (Button)findViewById(R.id.post_postButton);
         mEditText = (EditText)findViewById(R.id.post_post);
+<<<<<<< HEAD
         closeButton = (ImageButton)findViewById(R.id.post_closeButton);
+=======
+>>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
 
         SharedPreferences data = getSharedPreferences("DataSave", Context.MODE_PRIVATE);
         final String userIdDefault = data.getString("USERID", null);
@@ -43,6 +52,7 @@ public class PostActivity extends AppCompatActivity {
                 finish();
             }
         });
+<<<<<<< HEAD
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,5 +61,7 @@ public class PostActivity extends AppCompatActivity {
                 finish();
             }
         });
+=======
+>>>>>>> 5f5b63737a320f71c060e4e19270d29295642331
     }
 }
