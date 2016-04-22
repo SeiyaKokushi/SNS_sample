@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,19 +13,10 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 
-
-import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -51,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
         mPostButton = (Button) findViewById(R.id.main_postButton);
         mLoginButton = (Button) findViewById(R.id.main_loginButton);
 
-        lists = new ArrayList<>();
-
         setUpButtonListener();
 
         //Viewの可視性の初期化
@@ -60,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Firebaseのsetup
         Firebase.setAndroidContext(this);
+
+        lists = new ArrayList<>();
 
         //ルートパスの指定
         mRootRef = new Firebase(BuildConfig.FIREBASE_URL);
@@ -83,16 +72,9 @@ public class MainActivity extends AppCompatActivity {
 
                 Post post = new Post(new User(userId, userName), text, likeNum, timeStampKey);
 
-
                 lists.add(post);
 
-                //逆順にする破壊的メソッド
-                Collections.reverse(lists);
-
-                ListAdapter listAdapter = new ListAdapter(getApplicationContext(), R.layout.contain_layout, lists);
-
-                ListView listView = (ListView) findViewById(R.id.list);
-                listView.setAdapter(listAdapter);
+                setList(lists);
             }
 
             @Override
@@ -102,7 +84,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+                String timeStampKey = String.valueOf(dataSnapshot.getKey());
 
+                //要素を削除する
+                for(int i = 0; i < lists.size(); i++){
+                    if(lists.get(i).getTimeStampKey().equals(timeStampKey)){
+                        lists.remove(i);
+                    }
+                }
+
+                setList(lists);
             }
 
             @Override
@@ -113,6 +104,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(FirebaseError firebaseError) {
 
+            }
+
+            private void setList(ArrayList<Post> lists){
+                ArrayList<Post> setList = lists;
+
+                //逆順にする破壊的メソッド
+                Collections.reverse(setList);
+
+                ListAdapter listAdapter = new ListAdapter(getApplicationContext(), R.layout.contain_layout, setList);
+
+                ListView listView = (ListView) findViewById(R.id.list);
+                listView.setAdapter(listAdapter);
             }
         });
     }
