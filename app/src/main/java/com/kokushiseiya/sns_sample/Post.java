@@ -1,8 +1,6 @@
 package com.kokushiseiya.sns_sample;
 
-/**
- * Created by kokushiseiya on 16/04/18.
- */
+
 public class Post {
 
     private User user;
