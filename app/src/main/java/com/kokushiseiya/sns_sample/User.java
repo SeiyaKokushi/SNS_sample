@@ -1,8 +1,5 @@
 package com.kokushiseiya.sns_sample;
 
-/**
- * Created by shunsuke on 16/04/18.
- */
 public class User {
 
     private String userId;

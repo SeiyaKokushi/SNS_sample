@@ -51,8 +51,6 @@ public class ListAdapter extends ArrayAdapter<Post> {
                 post.plusLike();
                 int likeNum = post.getLikeNum();
 
-
-
                 ((TextView)view.findViewById(R.id.likeNum)).setText(String.valueOf(likeNum));
             }
         });

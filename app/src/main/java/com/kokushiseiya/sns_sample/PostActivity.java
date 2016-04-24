@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 
 public class PostActivity extends AppCompatActivity {
 
-
     Button mButton;
     EditText mEditText;
     ImageButton closeButton;
