@@ -31,37 +31,7 @@ public class ListAdapter extends ArrayAdapter<Post> {
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        final View view;
-        final ImageButton likeButton;
-
-        if (convertView != null) {
-            view = convertView;
-        } else {
-            view = inflater.inflate(layoutId, null);
-        }
-
-        final Post post = lists.get(position);
-
-        likeButton = (ImageButton) view.findViewById(R.id.likeButton);
-        likeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                post.plusLike();
-                int likeNum = post.getLikeNum();
-
-
-
-                ((TextView)view.findViewById(R.id.likeNum)).setText(String.valueOf(likeNum));
-            }
-        });
-
-        ((TextView) view.findViewById(R.id.userName)).setText(post.getUser().getUserName());
-        ((TextView) view.findViewById(R.id.userId)).setText("@" + post.getUser().getUserId());
-        ((TextView) view.findViewById(R.id.contain)).setText(post.getText());
-        ((TextView) view.findViewById(R.id.likeNum)).setText(String.valueOf(post.getLikeNum()));
-
-        return view;
-    }
+    /*
+        ここにgetViewの内容を記述していく
+     */
 }

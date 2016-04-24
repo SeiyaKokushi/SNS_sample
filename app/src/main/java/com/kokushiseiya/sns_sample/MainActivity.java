@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
 
         //viewとの紐付け
         mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        ListView listView = (ListView) findViewById(R.id.list);
+
+        ViewCompat.setNestedScrollingEnabled(listView, true);
 
         //ToolbarをActionbarとして設定
         setSupportActionBar(mToolbar);
@@ -57,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
         Post post6 = new Post(user3, "カロリー潰す");
         Post post7 = new Post(user5, "android芸人登場!!");
 
-        // 各項目の内容を格納するArrayListのインスタンスを生成
-        ArrayList<Post> lists = new ArrayList<>();
-
         lists.add(post1);
         lists.add(post2);
         lists.add(post3);
@@ -69,10 +69,7 @@ public class MainActivity extends AppCompatActivity {
         lists.add(post7);
 
         ListAdapter listAdapter = new ListAdapter(this, R.layout.contain_layout, lists);
-
-        ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(listAdapter);
-        ViewCompat.setNestedScrollingEnabled(listView, true);
     }
 
     @Override

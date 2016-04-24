@@ -39,12 +39,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (!userId.getText().toString().equals("") && !userName.getText().toString().equals("")) {
                     User user = new User(userId.getText().toString(), userName.getText().toString());
 
-                    //端末にログイン情報保存
-                    SharedPreferences data = getSharedPreferences("DataSave", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = data.edit();
-                    editor.putString("USERID", userId.getText().toString());
-                    editor.putString("USERNAME", userName.getText().toString());
-                    editor.apply();
+                    /*
+                        ここでSharedPreferenceを使って、端末にログイン情報保存
+                     */
 
                     finish();
                 } else {
