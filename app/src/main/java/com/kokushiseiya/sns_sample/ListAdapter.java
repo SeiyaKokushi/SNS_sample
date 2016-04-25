@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.client.Firebase;
@@ -17,36 +18,39 @@ import java.util.ArrayList;
  */
 public class ListAdapter extends ArrayAdapter<Post> {
 
-    private Context context; // Activityのcontext
-    private int layoutId; // ListViewレイアウトのID
-    private ArrayList<Post> lists; // 各項目の内容を格納しているArrayList
-    private LayoutInflater inflater;
+    static class ViewHolder {
+        TextView userId;
+        TextView userName;
+        TextView contain;
+        ImageView likeButton;
+        TextView likeNum;
+    }
 
     public ListAdapter(Context context, int layoutId, ArrayList<Post> lists) {
         super(context, layoutId, lists);
-
-        // 各フィールドの初期化・更新
-        this.context = context;
-        this.layoutId = layoutId;
-        this.lists = lists;
-        this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final View view;
-        final ImageButton likeButton;
+        final ViewHolder viewHolder;
 
         if (convertView != null) {
-            view = convertView;
+            viewHolder = (ViewHolder) convertView.getTag();
         } else {
-            view = inflater.inflate(layoutId, null);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.contain_layout, parent, false);
+            viewHolder = new ViewHolder();
+            viewHolder.userName = (TextView) convertView.findViewById(R.id.userName);
+            viewHolder.contain = (TextView) convertView.findViewById(R.id.contain);
+            viewHolder.likeButton = (ImageView) convertView.findViewById(R.id.likeButton);
+            viewHolder.likeNum = (TextView) convertView.findViewById(R.id.likeNum);
+            viewHolder.userId = (TextView) convertView.findViewById(R.id.userId);
+            convertView.setTag(viewHolder);
+
         }
 
-        final Post post = lists.get(position);
+        final Post post = getItem(position);
 
-        likeButton = (ImageButton) view.findViewById(R.id.likeButton);
-        likeButton.setOnClickListener(new View.OnClickListener() {
+        viewHolder.likeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 post.plusLike();
@@ -55,15 +59,15 @@ public class ListAdapter extends ArrayAdapter<Post> {
                 Firebase root = new Firebase(BuildConfig.FIREBASE_URL).child("post/" + post.getTimeStampKey() + "/likeNum");
                 root.setValue(likeNum);
 
-                ((TextView)view.findViewById(R.id.likeNum)).setText(String.valueOf(likeNum));
+                ((TextView)viewHolder.likeNum.findViewById(R.id.likeNum)).setText(String.valueOf(likeNum));
             }
         });
 
-        ((TextView) view.findViewById(R.id.userName)).setText(post.getUser().getUserName());
-        ((TextView) view.findViewById(R.id.userId)).setText("@" + post.getUser().getUserId());
-        ((TextView) view.findViewById(R.id.contain)).setText(post.getText());
-        ((TextView) view.findViewById(R.id.likeNum)).setText(String.valueOf(post.getLikeNum()));
+        ((TextView) viewHolder.userName.findViewById(R.id.userName)).setText(post.getUser().getUserName());
+        ((TextView) viewHolder.userId.findViewById(R.id.userId)).setText("@" + post.getUser().getUserId());
+        ((TextView) viewHolder.contain.findViewById(R.id.contain)).setText(post.getText());
+        ((TextView) viewHolder.likeNum.findViewById(R.id.likeNum)).setText(String.valueOf(post.getLikeNum()));
 
-        return view;
+        return convertView;
     }
 }
