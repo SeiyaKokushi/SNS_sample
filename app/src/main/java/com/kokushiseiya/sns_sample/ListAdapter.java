@@ -59,14 +59,14 @@ public class ListAdapter extends ArrayAdapter<Post> {
                 Firebase root = new Firebase(BuildConfig.FIREBASE_URL).child("post/" + post.getTimeStampKey() + "/likeNum");
                 root.setValue(likeNum);
 
-                ((TextView)viewHolder.likeNum.findViewById(R.id.likeNum)).setText(String.valueOf(likeNum));
+                viewHolder.likeNum.setText(String.valueOf(likeNum));
             }
         });
 
-        ((TextView) viewHolder.userName.findViewById(R.id.userName)).setText(post.getUser().getUserName());
-        ((TextView) viewHolder.userId.findViewById(R.id.userId)).setText("@" + post.getUser().getUserId());
-        ((TextView) viewHolder.contain.findViewById(R.id.contain)).setText(post.getText());
-        ((TextView) viewHolder.likeNum.findViewById(R.id.likeNum)).setText(String.valueOf(post.getLikeNum()));
+        viewHolder.userName.setText(post.getUser().getUserName());
+        viewHolder.userId.setText("@" + post.getUser().getUserId());
+        viewHolder.contain.setText(post.getText());
+        viewHolder.likeNum.setText(String.valueOf(post.getLikeNum()));
 
         return convertView;
     }
